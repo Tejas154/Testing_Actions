@@ -20,34 +20,34 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-      steps:
+    steps:
 
-    # Step 2: Clone the repository containing the Dockerfile
-    - name: Clone Repository with Dockerfile
-      env:
-        GITHUB_TOKEN: ${{ secrets.KAH_UI_SECRET_KEY }}
-      run: |
-        git clone git@github.com:kahtechnologies/supercontra.git /tmp/supercontra
+      # Step 2: Clone the repository containing the Dockerfile
+      - name: Clone Repository with Dockerfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.KAH_UI_SECRET_KEY }}
+        run: |
+          git clone git@github.com:kahtechnologies/supercontra.git /tmp/supercontra
 
-    # Step 3: Build Docker image using Dockerfile from the cloned repo
-    - name: Build Docker Image
-      run: |
-        docker build -t rust-dev \
-          --build-arg USERNAME=developer \
-          --build-arg UID=1000 \
-          --build-arg PROJECT_PWD=/home/developer/project \
-          -f /tmp/supercontra/products/studentslife/buildrustpodmanfiles .
+      # Step 3: Build Docker image using Dockerfile from the cloned repo
+      - name: Build Docker Image
+        run: |
+          docker build -t rust-dev \
+            --build-arg USERNAME=developer \
+            --build-arg UID=1000 \
+            --build-arg PROJECT_PWD=/home/developer/project \
+            -f /tmp/supercontra/products/studentslife/buildrustpodmanfiles .
 
-    # Step 4: Run Docker container
-    - name: Run Docker Container
-      run: |
-        docker run -d \
-          --name rust-container \
-          -v ${{ github.workspace }}:/home/developer/project \
-          -e RUST_LOG=info \
-          rust-dev
+      # Step 4: Run Docker container
+      - name: Run Docker Container
+        run: |
+          docker run -d \
+            --name rust-container \
+            -v ${{ github.workspace }}:/home/developer/project \
+            -e RUST_LOG=info \
+            rust-dev
 
-    # Step 5: Run commands inside the container
-    - name: Build the project inside the container
-      run: |
-        docker exec rust-container cargo build --verbose
+      # Step 5: Run commands inside the container
+      - name: Build the project inside the container
+        run: |
+          docker exec rust-container cargo build --verbose
