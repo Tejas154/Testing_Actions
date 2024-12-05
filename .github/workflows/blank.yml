@@ -74,14 +74,13 @@ jobs:
 
       # Set up the language runtime (e.g., Node.js, Python, Rust, etc.)
       - name: Set up Node.js
-        working-directory: ./src
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      # Install dependencies
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
+        working-directory: ./src
 
       # Run tests
       - name: Run Tests
