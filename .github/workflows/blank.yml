@@ -21,9 +21,6 @@ jobs:
     runs-on: ubuntu-latest
 
       steps:
-    # Step 1: Checkout the main repository (current repo)
-    - name: Checkout Main Repository
-      uses: actions/checkout@v4
 
     # Step 2: Clone the repository containing the Dockerfile
     - name: Clone Repository with Dockerfile
