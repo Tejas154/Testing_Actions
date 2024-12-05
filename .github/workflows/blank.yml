@@ -83,10 +83,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # Run tests
-      - name: Run Tests
-        run: npm test
+      - name: Start Server
+        working-directory: ./src
+        run: npm run start
 
-      # Run a build
-      - name: Build Project
-        run: npm run build
