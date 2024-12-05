@@ -1,56 +1,3 @@
-# # This is a basic workflow to help you get started with Actions
-
-# name: CI
-
-# # Controls when the workflow will run
-# on:
-#   # Triggers the workflow on push or pull request events but only for the "main" branch
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
-
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-
-# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-# jobs:
-#   # This workflow contains a single job called "build"
-#   build:
-#     # The type of runner that the job will run on
-#     runs-on: ubuntu-latest
-
-#     steps:
-
-#       - name: Clone Repository with Dockerfile
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.KAH_UI_SECRET_KEY }}
-#         run: |
-#           git clone git@github.com:kahtechnologies/supercontra.git /tmp/supercontra
-
-#       # Step 3: Build Docker image using Dockerfile from the cloned repo
-#       - name: Build Docker Image
-#         run: |
-#           docker build -t rust-dev \
-#             --build-arg USERNAME=developer \
-#             --build-arg UID=1000 \
-#             --build-arg PROJECT_PWD=/home/developer/project \
-#             -f /tmp/supercontra/products/studentslife/buildrustpodmanfiles .
-
-#       # Step 4: Run Docker container
-#       - name: Run Docker Container
-#         run: |
-#           docker run -d \
-#             --name rust-container \
-#             -v ${{ github.workspace }}:/home/developer/project \
-#             -e RUST_LOG=info \
-#             rust-dev
-
-#       # Step 5: Run commands inside the container
-#       - name: Build the project inside the container
-#         run: |
-#           docker exec rust-container cargo build --verbose
-
 name: CI/CD Workflow
 
 on:
@@ -74,13 +21,11 @@ jobs:
 
       # Set up the language runtime (e.g., Node.js, Python, Rust, etc.)
       - name: Set up Node.js
-        working-directory: ./src
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      # Install dependencies
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Start Server
