@@ -26,7 +26,7 @@ jobs:
           cd src
           npm install
 
-      - name: Run application
+      - name: Validate application
         run: |
           cd src
-          npm start
+          npm test
