@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+    "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
   }
 }
