@@ -3,33 +3,30 @@ name: Node.js CI
 on:
   push:
     branches:
-      - main  # Run the workflow when pushing to the 'main' branch
-  pull_request:  # Run on pull requests
+      - main
+  pull_request:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Adjust based on your project's requirements
+          node-version: 18
 
-      # Step 3: Install Dependencies
       - name: Install Dependencies
+        working-directory: src
         run: npm install
-        working-directory: ./src
 
-      # Step 4: Build the Project
       - name: Build Project
+        working-directory: src
         run: npm run build
 
-      # Step 5: Run Tests
       - name: Run Tests
+        working-directory: src
         run: npm test
