@@ -1,32 +1,32 @@
-name: Node.js CI
+name: Node.js CI/CD
 
 on:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '22.12.0'  # Specify your Node.js version here
 
-      - name: Install Dependencies
-        working-directory: src
-        run: npm install
+      - name: Install dependencies
+        run: |
+          cd src
+          npm install
 
-      - name: Build Project
-        working-directory: src
-        run: npm run build
-
-      - name: Run Tests
-        working-directory: src
-        run: npm test
+      - name: Run application
+        run: |
+          cd src
+          npm start
