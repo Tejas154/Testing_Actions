@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('/home/tejas/node_project/src/database.db', (err) => {
+const db = new sqlite3.Database('/home/tejas/GitWorld/Testing_Actions/src/database.db', (err) => {
     if (err) {
         console.error('Error opening database:', err.message);
     } else {
