@@ -1,35 +1,32 @@
-name: CI/CD Workflow
+name: Node.js CI
 
 on:
   push:
     branches:
-      - main # Triggers on push to the main branch
+      - main
   pull_request:
-    branches:
-      - main # Triggers on pull requests to the main branch
 
-jobs: 
-  # Step 1: Continuous Integration
+jobs:
   build-and-test:
-    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Set up the language runtime (e.g., Node.js, Python, Rust, etc.)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
+        working-directory: src
         run: npm install
-        working-directory: ./src
 
-      - name: Start Server
-        working-directory: ./src
-        run: npm run start
+      - name: Build Project
+        working-directory: src
+        run: npm run build
 
+      - name: Run Tests
+        working-directory: src
+        run: npm test
